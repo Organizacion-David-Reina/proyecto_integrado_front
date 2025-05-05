@@ -13,11 +13,18 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { UserFormComponent } from './users-management/user-form/user-form.component';
+import {MatSelectModule} from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { UsersListComponent } from './users-management/users-list/users-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    UserFormComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +38,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule, 
     MatButtonModule, 
     MatDividerModule, 
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

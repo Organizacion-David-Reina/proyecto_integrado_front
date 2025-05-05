@@ -4,10 +4,16 @@ html, body { height: 100%; }
 body { 
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    background: linear-gradient(to right, #a6a6ae, #f6f6f7);
+    background: linear-gradient(to right, #34889c, #73cce2);
+    // background: url('assets/fondo.jpg') no-repeat center center fixed;
+    // background-size: cover;
     background-attachment: fixed;
     
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Asegura que el body ocupe al menos el 100% del viewport */
+}
+
+.mat-mdc-text-field-wrapper {
+    background-color: #c2dde4 !important;
 }

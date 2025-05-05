@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'auth', pathMatch: 'full'},
@@ -8,6 +9,10 @@ const routes: Routes = [
     path: 'auth',
     component: LoginComponent
   },
+  {
+    path: 'users-form',
+    component: UserFormComponent
+  }
 ];
 
 @NgModule({

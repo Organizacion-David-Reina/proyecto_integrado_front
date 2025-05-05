@@ -1,9 +1,13 @@
 <div class="login-container">
-    <div class="form-container">
+    <div class="icon-container">
         <div class="icon-container">
-            <img src="assets/user_icon.png" alt="Logo" class="logo">
+            <img class="logo" src="assets/app_icon.png" alt="Logo">
         </div>
-        <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+    </div>
+    <div class="form-container">
+        <h1 class="login-title">Bienvenido</h1>
+        <h3 class="login-subtitle">Introduce tus datos para acceder a tu cuenta.</h3>
+        <form #loginForm="ngForm" (ngSubmit)="login(corporateMail, password)">
             <div class="inputs-container">
                 <mat-form-field  class="login-input">
                     <mat-label>Introduce tu email</mat-label>
@@ -12,7 +16,7 @@
                         placeholder="pat@example.com"
                         #User = "ngModel"
                         name = "corporateMail"
-                        [(ngModel)]="credentials.corporateMail"
+                        [(ngModel)]="corporateMail"
                         pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                         required/>
                     <mat-error *ngIf="User.errors?.['pattern']"> Formato incorrecto </mat-error>
@@ -20,11 +24,11 @@
                 </mat-form-field>
 
                 <mat-form-field  class="login-input">
-                    <mat-label>Introduce tu constraseña</mat-label>
+                    <mat-label>Introduce tu contraseña</mat-label>
                     <input
                         #Password = "ngModel"
                         name="password"
-                        [(ngModel)]="credentials.password"
+                        [(ngModel)]="password"
                         matInput type="Password"
                         required/>
                         <mat-error *ngIf="Password.invalid || Password.pristine">Campo requerido</mat-error>

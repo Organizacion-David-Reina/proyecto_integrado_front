@@ -1,22 +1,21 @@
-import { Component } from '@angular/core';
-import { Credentials, User } from 'src/app/data/data';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { User } from 'src/app/data/data';
 import { AuthService } from '../services/auth-services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
-  credentials: Credentials = {
-    corporateMail: '',
-    password: ''
-  };
+  corporateMail: string = '';
+  password: string = '';
 
   constructor(private _authService: AuthService) { }
 
-  login(userForm: Credentials): void {
-    this._authService.getUser(userForm).subscribe({
+  login(corporateMail: string, password: string): void {
+    this._authService.authUser(corporateMail, password).subscribe({
       next: (user: User) => {
         console.log(user);
         // Handle successful login here, e.g., store user data, redirect, etc.
