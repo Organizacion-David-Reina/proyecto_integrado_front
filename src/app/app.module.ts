@@ -18,13 +18,19 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { UsersListComponent } from './users-management/users-list/users-list.component';
+import { UpdateUserDialogComponent } from './users-management/update-user-dialog/update-user-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SnackBarComponent } from './utils/snack-bar/snack-bar.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserFormComponent,
-    UsersListComponent
+    UsersListComponent,
+    UpdateUserDialogComponent,
+    SnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +48,8 @@ import { UsersListComponent } from './users-management/users-list/users-list.com
     MatSelectModule,
     MatPaginatorModule,
     MatTableModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,3 +17,31 @@ body {
 .mat-mdc-text-field-wrapper {
     background-color: #c2dde4 !important;
 }
+
+.mat-mdc-table .mat-mdc-header-cell {
+    background-color: #234852 !important;
+    color: #fff !important;
+    text-align: center;
+}
+
+.mat-mdc-table .mat-mdc-row:nth-child(even) .mat-mdc-cell {
+    background-color: #688890 !important;
+    text-align: center;
+    color: #ffffff !important;
+}
+  
+.mat-mdc-table .mat-mdc-row:nth-child(odd) .mat-mdc-cell {
+    background-color: #c2dde4 !important;
+    text-align: center;
+    color: #000 !important;
+}
+
+.mat-mdc-table .mat-mdc-row:hover .mat-mdc-cell {
+    background-color: #4db0c9 !important;
+    color: #ffffff !important;
+    cursor: pointer;
+}
+
+.mat-mdc-paginator-page-size, .mat-mdc-paginator-range-label{
+    display: none !important;
+}

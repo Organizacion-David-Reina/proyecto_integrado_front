@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AppConfig, User, UserRequest } from 'src/app/data/data';
+import { AppConfig, UserRequest, UserResponse } from 'src/app/data/data';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,10 @@ export class UserService {
   }
 
   getAllUsers() {
-    return this._http.get<User[]>(`${AppConfig.apiUrl}users-list`);
+    return this._http.get<UserResponse[]>(`${AppConfig.apiUrl}users-list`);
+  }
+
+  updateUser(request: UserResponse) {
+    return this._http.put<void>(`${AppConfig.apiUrl}update-user`, request);
   }
 }

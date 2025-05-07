@@ -11,23 +11,29 @@ import { AuthService } from '../services/auth-services/auth.service';
 export class LoginComponent {
   corporateMail: string = '';
   password: string = '';
+  errorMessage: string = '';
 
   constructor(private _authService: AuthService) { }
 
   login(corporateMail: string, password: string): void {
     this._authService.authUser(corporateMail, password).subscribe({
-      next: (user: User) => {
-        console.log(user);
-        // Handle successful login here, e.g., store user data, redirect, etc.
-      }
-      , error: (error) => {
-        console.error('Login failed', error);
-        // Handle login error here, e.g., show error message
-      }
-      , complete: () => {
+      next: (user: User | null) => {
+        if (user) {
+          console.log('Login successful', user);
+          this.errorMessage = '';
+        } else {
+          console.log('User not found or invalid credentials');
+          this.errorMessage = 'Correo o contraseña incorrectos';
+        }
+      },
+      error: (error) => {
+        console.error('Login request failed', error);
+        this.errorMessage = 'Ocurrió un error al intentar iniciar sesión';
+      },
+      complete: () => {
         console.log('Login request completed');
-        // Optionally, you can perform any final actions after the request completes
       }
     });
-  }
+  }  
+  
 }
