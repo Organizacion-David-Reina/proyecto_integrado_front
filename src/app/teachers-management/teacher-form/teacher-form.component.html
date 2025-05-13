@@ -1,0 +1,76 @@
+<div class="teacher-container">
+    <div class="form-container">
+        <form #registerTeacherForm="ngForm" [(ngModel)]="teacherForm" (ngSubmit)="saveTeacher()">
+            <div class="inputs-container">
+                    
+                <h2 class="main-form-titles">Registro de profesor</h2>
+                
+                <div class="first-row">  
+                    <mat-form-field class="teacher-input">
+                        <mat-label> Nombre </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="Luis"
+                            #Name = "ngModel"
+                            [(ngModel)]="teacherForm.name"
+                            name = "name"
+                            required/>
+                        <mat-error *ngIf="Name.errors?.['required'] || Name.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="teacher-input">
+                        <mat-label> Apellidos </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="Perez"
+                            #Lastname = "ngModel"
+                            [(ngModel)]="teacherForm.lastname"
+                            name = "lastname"
+                            required/>
+                        <mat-error *ngIf="Lastname.errors?.['required'] || Lastname.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="second-row">
+                    <mat-form-field class="teacher-input">
+                        <mat-label> Nif </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="123456789A"
+                            #Nif = "ngModel"
+                            [(ngModel)]="teacherForm.nif"
+                            pattern="^[0-9]{8}[A-Za-z]$"
+                            name = "nif"
+                            required/>
+                        <mat-error *ngIf="Nif.errors?.['pattern']"> Formato incorrecto </mat-error>
+                        <mat-error *ngIf="Nif.errors?.['required'] || Nif.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="teacher-input">
+                        <mat-label> Mail </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="example@gmail.com"
+                            #Mail = "ngModel"
+                            [(ngModel)]="teacherForm.mail"
+                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            name = "mail"
+                            required/>
+                        <mat-error *ngIf="Mail.errors?.['pattern']"> Formato incorrecto </mat-error>
+                        <mat-error *ngIf="Mail.errors?.['required'] || Mail.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+
+                </div>
+                
+                <button mat-flat-button [disabled]="registerTeacherForm.invalid">Acceder</button>
+            </div>
+            <p class="error-message" *ngIf="errorMessage !== ''"> {{errorMessage}} </p>
+        </form>
+    </div>
+
+    <div class="icon-container">
+        <img class="logo" src="assets/app_icon.png" alt="Logo">
+    </div>
+</div>
+
+

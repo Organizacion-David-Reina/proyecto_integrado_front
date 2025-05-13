@@ -22,6 +22,12 @@ import { UpdateUserDialogComponent } from './users-management/update-user-dialog
 import { MatDialogModule } from '@angular/material/dialog';
 import { SnackBarComponent } from './utils/snack-bar/snack-bar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { StudentFormComponent } from './students-management/student-form/student-form.component';
+import { StudentsListComponent } from './students-management/students-list/students-list.component';
+import { TeacherFormComponent } from './teachers-management/teacher-form/teacher-form.component';
+import { TeachersListComponent } from './teachers-management/teachers-list/teachers-list.component';
+import { UpdateStudentDialogComponent } from './students-management/update-student-dialog/update-student-dialog.component';
+import { UpdateTeacherDialogComponent } from './teachers-management/update-teacher-dialog/update-teacher-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +36,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     UserFormComponent,
     UsersListComponent,
     UpdateUserDialogComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    StudentFormComponent,
+    StudentsListComponent,
+    TeacherFormComponent,
+    TeachersListComponent,
+    UpdateStudentDialogComponent,
+    UpdateTeacherDialogComponent
   ],
   imports: [
     BrowserModule,

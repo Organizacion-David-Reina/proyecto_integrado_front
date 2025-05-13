@@ -1,0 +1,72 @@
+<div class="student-container">
+    <div class="form-container">
+        <form #registerStudentForm="ngForm" [(ngModel)]="studentForm" (ngSubmit)="saveUser()">
+            <div class="inputs-container">
+                    
+                <h2 class="main-form-titles">Registro de estudiante</h2>
+                
+                <div class="first-row">  
+                    <mat-form-field class="student-input">
+                        <mat-label>Nombre </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="Luis"
+                            #Name = "ngModel"
+                            [(ngModel)]="studentForm.name"
+                            name = "name"
+                            required/>
+                        <mat-error *ngIf="Name.errors?.['required'] || Name.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="student-input">
+                        <mat-label> Apellidos </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="Perez"
+                            #Lastname = "ngModel"
+                            [(ngModel)]="studentForm.lastname"
+                            name = "lastname"
+                            required/>
+                        <mat-error *ngIf="Lastname.errors?.['required'] || Lastname.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="second-row">
+                    <mat-form-field class="student-input">
+                        <mat-label> Nif </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="123456789A"
+                            #Nif = "ngModel"
+                            [(ngModel)]="studentForm.nif"
+                            pattern="^[0-9]{8}[A-Za-z]$"
+                            name = "nif"
+                            required/>
+                        <mat-error *ngIf="Nif.errors?.['pattern']"> Formato incorrecto </mat-error>
+                        <mat-error *ngIf="Nif.errors?.['required'] || Nif.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="student-input">
+                        <mat-label>Tipo de bono</mat-label>
+                        <mat-select
+                            [(ngModel)]="studentForm.bonus.id"
+                            name="bonus"
+                            #Bonus = "ngModel"
+                            required>
+                            <mat-option [value]="bonus.id" *ngFor="let bonus of bonuses">{{bonus.bondType}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="Bonus.errors?.['required'] || Bonus.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+                </div>
+                
+                <button mat-flat-button [disabled]="registerStudentForm.invalid">Acceder</button>
+            </div>
+            <p class="error-message" *ngIf="errorMessage !== ''"> {{errorMessage}} </p>
+        </form>
+    </div>
+
+    <div class="icon-container">
+        <img class="logo" src="assets/app_icon.png" alt="Logo">
+    </div>
+</div>
+

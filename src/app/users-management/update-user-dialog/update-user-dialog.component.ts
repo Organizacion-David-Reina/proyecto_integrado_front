@@ -26,7 +26,6 @@ export class UpdateUserDialogComponent {
 
   constructor(private _userService: UserService) {
     this.user = { ...this.data };
-    console.log(this.user.role);
   }
 
   updateUser(): void {
@@ -39,6 +38,5 @@ export class UpdateUserDialogComponent {
   onNoClick(): void {
     this.dialogRef.close(false);
   }
-  
   
 }

@@ -17,7 +17,7 @@ export class UserFormComponent {
       name: '',
       lastname: '',
       role: {
-        id: -1,
+        id: undefined,
         rol: ''
       }
     }, 

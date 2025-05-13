@@ -1,0 +1,81 @@
+.student-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #299ebb;
+    border-radius: 20px;
+    width: 40%;
+    height: 100vh;
+}
+
+.form-container form {
+    align-self: center;
+}
+  
+.form-container h2 {
+    align-self: flex-start;
+    color: #ffffff;
+    font-style: bold;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 25px !important;
+    padding: 0 0 20px 10px;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+}
+
+.logo {
+    width: 350px;
+    height: 350px;
+}
+
+.inputs-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.student-input {
+    width: 280px !important;
+    height: 75px;
+    padding: 0 0 20px 10px;
+}
+
+button {
+    width: 280px !important;
+    height: 40px !important;
+    background-color: #0c1b3a !important;
+    color: #ffffff !important;
+    margin-left: 10px;
+}
+
+button[disabled] {
+    background-color: #4d525f !important;
+    color: #ffffff;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.error-message {
+    text-align: center;
+    margin-top: 20px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    color: red !important;
+    font-weight: bold !important;
+    font-size: 15px !important;
+    margin-left: 10px !important;
+}

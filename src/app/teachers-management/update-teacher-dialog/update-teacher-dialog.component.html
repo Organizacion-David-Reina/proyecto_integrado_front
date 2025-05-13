@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Actualizar profesor</h2>
+
+<form #editForm="ngForm">
+<mat-dialog-content>
+    <mat-form-field class="dialog-input" appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="teacher.name" #Name="ngModel" name="name" required />
+        <mat-error *ngIf="Name.errors?.['required'] || Name.errors?.['pristine']"> Campo requerido </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="dialog-input" appearance="fill">
+        <mat-label>Apellido</mat-label>
+        <input matInput [(ngModel)]="teacher.lastname" #Lastname="ngModel" name="lastname" required />
+        <mat-error *ngIf="Lastname.errors?.['required'] || Lastname.errors?.['pristine']"> Campo requerido </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="dialog-input" appearance="fill">
+        <mat-label>Mail</mat-label>
+        <input matInput [(ngModel)]="teacher.mail" #Mail="ngModel" name="mail" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required />
+        <mat-error *ngIf="Mail.errors?.['required'] || Mail.errors?.['pristine']"> Campo requerido </mat-error>
+        <mat-error *ngIf="Mail.errors?.['pattern']"> Formato incorrecto </mat-error>
+    </mat-form-field>
+    <p class="error-message" *ngIf="errorMessage !== ''"> {{errorMessage}} </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onNoClick()">Cancelar</button>
+    <button mat-button type="submit" (click)="updateTeacher()" [disabled]="editForm.invalid" cdkFocusInitial>Actualizar</button>
+</mat-dialog-actions>
+</form>  

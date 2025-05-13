@@ -1,0 +1,45 @@
+<div class="students-container">
+  <div class ="students-header">
+    <h2>Lista de estudiantes</h2>
+    <form class="search-form">
+
+      <mat-form-field class="filter-input">
+        <mat-label>Filtrar por bono</mat-label>
+        <mat-select [(ngModel)]="selectedBonusId" name="bonusId" (selectionChange)="applyFilters()">
+          <mat-option [value]="null">Todos</mat-option>
+          <mat-option [value]="bonus.id" *ngFor="let bonus of bonuses">{{ bonus.bondType }}</mat-option>
+        </mat-select>
+      </mat-form-field>      
+
+    </form>
+  </div>
+  <div class="mat-elevation-z8 table-container">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="Nif">
+        <th mat-header-cell *matHeaderCellDef> NIF </th>
+        <td mat-cell *matCellDef="let student"> {{student.nif}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Nombre completo">
+        <th mat-header-cell *matHeaderCellDef> Nombre completo </th>
+        <td mat-cell *matCellDef="let student"> {{student.name + " " + student.lastname}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Tipo de bono">
+        <th mat-header-cell *matHeaderCellDef> Bono </th>
+        <td mat-cell *matCellDef="let student"> {{student.bonus.bondType}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Mensualidad">
+        <th mat-header-cell *matHeaderCellDef> Menusalidad </th>
+        <td mat-cell *matCellDef="let student"> {{student.bonus.price + " €"}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[7]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
