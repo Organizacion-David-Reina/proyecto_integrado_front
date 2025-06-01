@@ -1,0 +1,54 @@
+<div class="calendary-container">
+    <div class="calendary-header">
+        <h1>CALENDARIO</h1>
+    </div>
+    <div class="calendary-change-week-panel">
+        <button class="button-arrow" mat-icon-button aria-label="Volver" (click)="goToPreviousWeek()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <p class="week-day">{{ weekDays[0] | date: 'EEE d/MM/yy' }}</p>
+
+        <img class="big-icon" src="assets/calendary-icon.png" alt="icon">
+
+        <p class="week-day">{{ weekDays[6] | date: 'EEE d/MM/yy' }}</p>
+
+        <button class="button-arrow" mat-icon-button aria-label="Adelante" (click)="goToNextWeek()">
+            <mat-icon>arrow_forward</mat-icon>
+        </button>
+    </div>
+
+    <div class="calendary-days"> 
+       <div class="calendary-day" *ngFor="let day of weekdaysOnly">
+            <div class="day-header"> 
+                <p class="day">{{ day | date: 'EEE d/MM' }}</p> 
+            </div>
+            <div class="dance-classes-container">
+                <div class="dance-class" *ngFor="let class of getClassesForDay(day)" (click)="openDialog(class)">
+                    <div class="first-row">
+                        <img class="small-icon" src="assets/time-icon.png" alt="icon" />
+                        <p>{{ class.startTime }} / {{ class.endTime }}</p>
+                        <img class="small-icon icon-right" (click)="openReservationDialog(class); $event.stopPropagation()" 
+                         src="assets/add_icon.png" alt="icon" />
+                    </div>
+                    <div class="second-row">
+                        <p class="style">{{ class.style.style }}</p>
+                        <p>{{ class.level }}</p>
+                    </div>
+                    <div class="third-row">
+                        <p>{{ class.teacher.name + " " + class.teacher.lastname}}</p>
+                    </div>
+                    <div class="fourth-row">
+                        <p> {{ class.room.roomName }}</p>
+                        <p> Aforo: {{ class.reservations }} / {{ class.room.capacity }}  </p>
+                    </div>
+                </div>
+                <div class="button-container" *ngIf="user.role.id !== 3">
+                    <button class="button-add" mat-icon-button aria-label="Agregar" (click)="addClass(day)">
+                    <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>

@@ -25,3 +25,7 @@ mat-dialog-content {
 .dialog-input {
     width: 70%;
 }
+
+.dialog-input textarea {
+    resize: vertical;
+}

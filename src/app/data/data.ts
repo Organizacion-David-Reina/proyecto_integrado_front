@@ -14,10 +14,19 @@ export const bonuses: Bonus[] = [
     { id: 3, bondType: 'Bono de 10 clases', price: 105 }
 ];
 
+export const levels: string[] = [
+    "Inicial",
+    "Intermedio",
+    "Avanzado"
+];
+
 export interface User {
     id: number,
     name: string,
     lastname: string,
+    phoneNumber: string,
+    address: string,
+    dayOfBirth: string | Date,
     role: Rol
 }
 
@@ -26,6 +35,9 @@ export interface UserResponse {
     name: string,
     lastname: string,
     corporateMail: string,
+    phoneNumber: string,
+    address: string,
+    dayOfBirth: string | Date,
     role: Rol
 }
 
@@ -65,4 +77,33 @@ export interface Teacher {
     lastname: string,    
     mail: string,
     nif: string
+}
+
+
+export interface Room {
+    id: number,
+    capacity: number,
+    roomName: string
+}
+
+export interface Style {
+    id: number,
+    style: string
+}
+
+export interface Class {
+    id: number,
+    style: Style,
+    teacher: Teacher,
+    room: Room,
+    reservations: number,
+    level: string,
+    day: Date,
+    startTime: string,
+    endTime: string,
+}
+
+export interface ReservationRequest {
+    classId: number,
+    studentNif: string
 }

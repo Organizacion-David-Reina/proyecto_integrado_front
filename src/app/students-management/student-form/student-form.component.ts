@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { bonuses, Student } from 'src/app/data/data';
 import { StudentService } from '../services/student.service';
+import { Router } from '@angular/router';
+import { Utils } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-student-form',
@@ -8,6 +10,7 @@ import { StudentService } from '../services/student.service';
   styleUrls: ['./student-form.component.scss']
 })
 export class StudentFormComponent {
+  utils = Utils;
   bonuses = bonuses;
   studentForm: Student = {
     id: -1,
@@ -22,17 +25,16 @@ export class StudentFormComponent {
   }
   errorMessage: string = '';
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService, private router: Router) { }
   
-  saveUser(): void {
+  saveStudent(): void {
     const selectedBonus = this.bonuses.find(r => r.id === this.studentForm.bonus.id);
-    console.log(selectedBonus);
     if (selectedBonus) {
       this.studentForm.bonus = { ...selectedBonus };
-      console.log(this.studentForm.bonus);
     }
     this.studentService.saveStudent(this.studentForm).subscribe({
-      next: res => alert("Éxito: " + res),
+      next: res => 
+        this.router.navigate(['/students/students-list']),
       error: err => this.errorMessage = err.error.message
     });
   }

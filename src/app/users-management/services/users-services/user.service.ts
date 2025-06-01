@@ -20,4 +20,8 @@ export class UserService {
   updateUser(request: UserResponse) {
     return this._http.put<void>(`${AppConfig.apiUrl}update-user`, request);
   }
+
+  deleteUser(userId: number) {
+    return this._http.delete<void>(`${AppConfig.apiUrl}delete-user/${userId}`);
+  }
 }

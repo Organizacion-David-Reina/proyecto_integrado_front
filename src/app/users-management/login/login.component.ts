@@ -1,39 +1,34 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { User } from 'src/app/data/data';
+import { User, UserResponse } from 'src/app/data/data';
 import { AuthService } from '../services/auth-services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
   corporateMail: string = '';
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private _authService: AuthService) { }
+  constructor(private _authService: AuthService, private router: Router) { }
 
   login(corporateMail: string, password: string): void {
     this._authService.authUser(corporateMail, password).subscribe({
-      next: (user: User | null) => {
+      next: (user: UserResponse | null) => {
         if (user) {
-          console.log('Login successful', user);
-          this.errorMessage = '';
+          localStorage.setItem('user', JSON.stringify(user));
+          this.router.navigate(['/classes/classes-calendar']);
         } else {
-          console.log('User not found or invalid credentials');
           this.errorMessage = 'Correo o contraseña incorrectos';
         }
       },
-      error: (error) => {
-        console.error('Login request failed', error);
+      error: () => {
         this.errorMessage = 'Ocurrió un error al intentar iniciar sesión';
-      },
-      complete: () => {
-        console.log('Login request completed');
       }
     });
-  }  
-  
+  }
 }
+

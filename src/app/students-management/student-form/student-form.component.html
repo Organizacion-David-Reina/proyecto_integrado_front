@@ -1,6 +1,6 @@
 <div class="student-container">
     <div class="form-container">
-        <form #registerStudentForm="ngForm" [(ngModel)]="studentForm" (ngSubmit)="saveUser()">
+        <form #registerStudentForm="ngForm" [(ngModel)]="studentForm" (ngSubmit)="saveStudent()">
             <div class="inputs-container">
                     
                 <h2 class="main-form-titles">Registro de estudiante</h2>
@@ -13,6 +13,9 @@
                             placeholder="Luis"
                             #Name = "ngModel"
                             [(ngModel)]="studentForm.name"
+                            (keydown)="utils.preventNumbers($event)" 
+                            (paste)="utils.preventPasteNumbers($event)"
+                            maxlength="30"
                             name = "name"
                             required/>
                         <mat-error *ngIf="Name.errors?.['required'] || Name.errors?.['pristine']"> Campo requerido </mat-error>
@@ -25,6 +28,9 @@
                             placeholder="Perez"
                             #Lastname = "ngModel"
                             [(ngModel)]="studentForm.lastname"
+                            (keydown)="utils.preventNumbers($event)" 
+                            (paste)="utils.preventPasteNumbers($event)"
+                            maxlength="50"
                             name = "lastname"
                             required/>
                         <mat-error *ngIf="Lastname.errors?.['required'] || Lastname.errors?.['pristine']"> Campo requerido </mat-error>

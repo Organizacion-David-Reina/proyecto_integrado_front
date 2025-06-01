@@ -20,4 +20,12 @@ export class StudentService {
     updateStudent(request: Student) {
       return this._http.put<void>(`${AppConfig.apiUrl}update-student`, request);
     }
+
+    getStudentsByClassId(classId: number) {
+      return this._http.get<Student[]>(`${AppConfig.apiUrl}students-reserved/${classId}`);
+    }
+
+    deleteStudent(studentId: number) {
+      return this._http.delete<void>(`${AppConfig.apiUrl}delete-student/${studentId}`);
+    }
 }

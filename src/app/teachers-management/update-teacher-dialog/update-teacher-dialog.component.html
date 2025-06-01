@@ -4,13 +4,29 @@
 <mat-dialog-content>
     <mat-form-field class="dialog-input" appearance="fill">
         <mat-label>Nombre</mat-label>
-        <input matInput [(ngModel)]="teacher.name" #Name="ngModel" name="name" required />
+        <input 
+            matInput 
+            [(ngModel)]="teacher.name" 
+            #Name="ngModel" 
+            name="name"
+            (keydown)="utils.preventNumbers($event)" 
+            (paste)="utils.preventPasteNumbers($event)"
+            maxlength="30"
+            required />
         <mat-error *ngIf="Name.errors?.['required'] || Name.errors?.['pristine']"> Campo requerido </mat-error>
     </mat-form-field>
 
     <mat-form-field class="dialog-input" appearance="fill">
-        <mat-label>Apellido</mat-label>
-        <input matInput [(ngModel)]="teacher.lastname" #Lastname="ngModel" name="lastname" required />
+        <mat-label>Apellidos</mat-label>
+        <input 
+            matInput 
+            [(ngModel)]="teacher.lastname" 
+            #Lastname="ngModel" 
+            (keydown)="utils.preventNumbers($event)" 
+            (paste)="utils.preventPasteNumbers($event)"
+            maxlength="50"
+            name="lastname" 
+            required />
         <mat-error *ngIf="Lastname.errors?.['required'] || Lastname.errors?.['pristine']"> Campo requerido </mat-error>
     </mat-form-field>
 

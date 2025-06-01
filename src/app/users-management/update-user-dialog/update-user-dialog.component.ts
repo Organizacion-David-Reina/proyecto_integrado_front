@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { UserService } from '../services/users-services/user.service';
 import { roles, UserResponse } from 'src/app/data/data';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Utils } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-update-user-dialog',
@@ -9,6 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./update-user-dialog.component.scss']
 })
 export class UpdateUserDialogComponent {
+  utils = Utils
   readonly dialogRef = inject(MatDialogRef<UpdateUserDialogComponent>);
   readonly data = inject<UserResponse>(MAT_DIALOG_DATA);
   user: UserResponse = {
@@ -16,6 +18,9 @@ export class UpdateUserDialogComponent {
     name: '',
     lastname: '',
     corporateMail: '',
+    phoneNumber: '',
+    address: '',
+    dayOfBirth: '',
     role: {
       id: 0,
       rol: ''

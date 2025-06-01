@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { bonuses, Student } from 'src/app/data/data';
 import { StudentService } from '../services/student.service';
+import { Utils } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-update-student-dialog',
@@ -9,6 +10,7 @@ import { StudentService } from '../services/student.service';
   styleUrls: ['./update-student-dialog.component.scss']
 })
 export class UpdateStudentDialogComponent {
+  utils = Utils;
   readonly dialogRef = inject(MatDialogRef<UpdateStudentDialogComponent>);
   readonly data = inject<Student>(MAT_DIALOG_DATA);
   student: Student = {

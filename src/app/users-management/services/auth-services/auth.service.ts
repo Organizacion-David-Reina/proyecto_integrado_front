@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AppConfig, Credentials, User } from 'src/app/data/data';
+import { AppConfig, Credentials, User, UserResponse } from 'src/app/data/data';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthService {
       .set('corporateMail', corporateMail)
       .set('password', password);
   
-    return this._http.get<User>(`${AppConfig.apiUrl}login`, { params });
+    return this._http.get<UserResponse>(`${AppConfig.apiUrl}login`, { params });
   }
   
 }

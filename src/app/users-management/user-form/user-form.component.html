@@ -14,6 +14,9 @@
                             #Name = "ngModel"
                             [(ngModel)]="userForm.user.name"
                             name = "name"
+                            (keydown)="utils.preventNumbers($event)"
+                            (paste)="utils.preventPasteNumbers($event)"
+                            maxlength="30"
                             required/>
                         <mat-error *ngIf="Name.errors?.['required'] || Name.errors?.['pristine']"> Campo requerido </mat-error>
                     </mat-form-field>
@@ -25,6 +28,9 @@
                             placeholder="Perez"
                             #Lastname = "ngModel"
                             [(ngModel)]="userForm.user.lastname"
+                            (keydown)="utils.preventNumbers($event)"
+                            (paste)="utils.preventPasteNumbers($event)"
+                            maxlength="50"
                             name = "lastname"
                             required/>
                         <mat-error *ngIf="Lastname.errors?.['required'] || Lastname.errors?.['pristine']"> Campo requerido </mat-error>
@@ -72,6 +78,53 @@
                             required/>
                         <mat-error *ngIf="Mail.errors?.['pattern']"> Formato incorrecto </mat-error>
                         <mat-error *ngIf="Mail.errors?.['required'] || Mail.errors?.['pristine']">Campo requerido</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="signup-input">
+                        <mat-label>Teléfono</mat-label>
+                        <input type="tel" 
+                            matInput 
+                            placeholder="600-55-12-34"
+                            #PhoneNumber = "ngModel"
+                            name = "phoneNumber"
+                            [(ngModel)]="userForm.user.phoneNumber"
+                            (keydown)="utils.preventLetters($event)"
+                            (paste)="utils.preventPasteLetters($event)"
+                            required>
+                        <mat-icon matSuffix>mode_edit</mat-icon>
+                        <mat-error *ngIf="PhoneNumber.errors?.['required'] || PhoneNumber.errors?.['pristine']">Campo requerido</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="fourth-row">
+                    <mat-form-field class="signup-input-textarea">
+                        <mat-label>Dirección</mat-label>
+                        <textarea
+                            matInput
+                            #Address="ngModel"
+                            [(ngModel)]="userForm.user.address"
+                            name="address"
+                            required
+                            maxlength="150">
+                        </textarea>
+                        <mat-error *ngIf="Address.errors?.['required'] || Address.errors?.['pristine']">Campo requerido</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="fifth-row">
+                    <mat-form-field class="signup-input">
+                        <mat-label>Seleccione una fecha</mat-label>
+                        <input
+                            [(ngModel)]="userForm.user.dayOfBirth"
+                            name="dayOfBirth"
+                            #DayOfBirth = "ngModel"
+                            required
+                            readonly
+                            matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="DayOfBirth.errors?.['required']"> Campo requerido </mat-error>
+                        <mat-error *ngIf="DayOfBirth.errors?.['matDatepickerParse']"> Formato de fecha inválido </mat-error>
                     </mat-form-field>
 
                     <mat-form-field  class="signup-input">

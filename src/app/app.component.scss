@@ -1,0 +1,17 @@
+/* El contenedor principal ocupa toda la pantalla */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* altura total de la ventana */
+}
+
+/* Navbar ocupa su espacio natural */
+app-navbar {
+  flex-shrink: 0; /* no se encoge */
+}
+
+/* El contenido ocupa todo el espacio restante */
+.content {
+  flex-grow: 1;    /* crece para ocupar el resto */
+  overflow-y: auto; /* para scroll vertical si es necesario */
+}

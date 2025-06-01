@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { bonuses, Student } from 'src/app/data/data';
@@ -8,15 +8,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { UpdateStudentDialogComponent } from '../update-student-dialog/update-student-dialog.component';
 import { SnackBarComponent } from 'src/app/utils/snack-bar/snack-bar.component';
+import { DeleteStudentDialogComponent } from '../delete-student-dialog/delete-student-dialog.component';
 
 @Component({
   selector: 'app-students-list',
   templateUrl: './students-list.component.html',
   styleUrls: ['./students-list.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class StudentsListComponent {
-  displayedColumns: string[] = ['Nif', 'Nombre completo', 'Tipo de bono', 'Mensualidad'];
+  displayedColumns: string[] = ['Nif', 'Nombre completo', 'Tipo de bono', 'Mensualidad', 'Acciones'];
   studentList : Student[] = [];
   student: Student = {
     id: -1,
@@ -54,7 +54,7 @@ export class StudentsListComponent {
     }
     
     
-    openDialog(student: Student): void {
+    openUpdateDialog(student: Student): void {
       const dialogRef = this.dialog.open(UpdateStudentDialogComponent, {
         width: '400px',
         data: student
@@ -69,6 +69,29 @@ export class StudentsListComponent {
       
           this._snackBar.openFromComponent(SnackBarComponent, {
             data: 'Estudiante actualizado correctamente',
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+        }
+      });
+    }
+
+    openDeleteDialog(studentId: number) {
+      const dialogRef = this.dialog.open(DeleteStudentDialogComponent, {
+        width: '400px',
+        data: studentId
+      });
+    
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this._studentService.getAllStudents().subscribe((response) => {
+            this.studentList = response;
+            this.dataSource.data = [...this.studentList];
+          });
+      
+          this._snackBar.openFromComponent(SnackBarComponent, {
+            data: 'Estudiante eliminado correctamente',
             duration: 3000,
             horizontalPosition: 'center',
             verticalPosition: 'top',

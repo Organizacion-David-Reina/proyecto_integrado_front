@@ -8,6 +8,7 @@ import { Teacher } from 'src/app/data/data';
 import { TeacherService } from '../services/teacher.service';
 import { UpdateTeacherDialogComponent } from '../update-teacher-dialog/update-teacher-dialog.component';
 import { SnackBarComponent } from 'src/app/utils/snack-bar/snack-bar.component';
+import { DeleteTeacherDialogComponent } from '../delete-teacher-dialog/delete-teacher-dialog.component';
 
 @Component({
   selector: 'app-teachers-list',
@@ -15,7 +16,7 @@ import { SnackBarComponent } from 'src/app/utils/snack-bar/snack-bar.component';
   styleUrls: ['./teachers-list.component.scss']
 })
 export class TeachersListComponent {
-  displayedColumns: string[] = ['Mail', 'Nombre completo', 'Nif'];
+  displayedColumns: string[] = ['Mail', 'Nombre completo', 'Nif', 'Acciones'];
   teacherList : Teacher[] = [];
   teacher: Teacher = {
     id: -1,
@@ -51,7 +52,7 @@ export class TeachersListComponent {
     }
     
     
-    openDialog(teacher: Teacher): void {
+    openUpdateDialog(teacher: Teacher): void {
       const dialogRef = this.dialog.open(UpdateTeacherDialogComponent, {
         width: '400px',
         data: teacher
@@ -66,6 +67,29 @@ export class TeachersListComponent {
       
           this._snackBar.openFromComponent(SnackBarComponent, {
             data: 'Profesor actualizado correctamente',
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+        }
+      });
+    }
+
+    openDeleteDialog(teacherId: number) {
+      const dialogRef = this.dialog.open(DeleteTeacherDialogComponent, {
+        width: '400px',
+        data: teacherId
+      });
+    
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this._teacherService.getAllTeachers().subscribe((response) => {
+            this.teacherList = response;
+            this.dataSource.data = [...this.teacherList];
+          });
+      
+          this._snackBar.openFromComponent(SnackBarComponent, {
+            data: 'Profesor eliminado correctamente',
             duration: 3000,
             horizontalPosition: 'center',
             verticalPosition: 'top',

@@ -1,7 +1,6 @@
-<!-- <app-user-form></app-user-form> -->
-<!-- <app-login></app-login> -->
-<!-- <app-users-list></app-users-list> -->
-<!-- <app-student-form></app-student-form> -->
-<!-- <app-students-list></app-students-list> -->
-<!-- <app-teacher-form></app-teacher-form> -->
-<!-- <app-teachers-list></app-teachers-list> -->
+<div  class="app-container">
+  <app-navbar *ngIf="showNavbar"></app-navbar>
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

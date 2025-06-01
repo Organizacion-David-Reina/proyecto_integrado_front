@@ -13,6 +13,9 @@
                             placeholder="Luis"
                             #Name = "ngModel"
                             [(ngModel)]="teacherForm.name"
+                            (keydown)="utils.preventNumbers($event)" 
+                            (paste)="utils.preventPasteNumbers($event)"
+                            maxlength="30"
                             name = "name"
                             required/>
                         <mat-error *ngIf="Name.errors?.['required'] || Name.errors?.['pristine']"> Campo requerido </mat-error>
@@ -25,6 +28,9 @@
                             placeholder="Perez"
                             #Lastname = "ngModel"
                             [(ngModel)]="teacherForm.lastname"
+                            (keydown)="utils.preventNumbers($event)" 
+                            (paste)="utils.preventPasteNumbers($event)"
+                            maxlength="50"
                             name = "lastname"
                             required/>
                         <mat-error *ngIf="Lastname.errors?.['required'] || Lastname.errors?.['pristine']"> Campo requerido </mat-error>

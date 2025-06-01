@@ -1,31 +1,47 @@
 <h2 mat-dialog-title>Actualizar estudiante</h2>
 
 <form #editForm="ngForm">
-<mat-dialog-content>
-    <mat-form-field class="dialog-input" appearance="fill">
-        <mat-label>Nombre</mat-label>
-        <input matInput [(ngModel)]="student.name" #Name="ngModel" name="name" required />
-        <mat-error *ngIf="Name.errors?.['required'] || Name.errors?.['pristine']"> Campo requerido </mat-error>
-    </mat-form-field>
+    <mat-dialog-content>
+        <mat-form-field class="dialog-input" appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input 
+                matInput 
+                [(ngModel)]="student.name" 
+                #Name="ngModel" 
+                (keydown)="utils.preventNumbers($event)" 
+                (paste)="utils.preventPasteNumbers($event)"
+                maxlength="30"
+                name="name" 
+                required />
+            <mat-error *ngIf="Name.errors?.['required'] || Name.errors?.['pristine']"> Campo requerido </mat-error>
+        </mat-form-field>
 
-    <mat-form-field class="dialog-input" appearance="fill">
-        <mat-label>Apellido</mat-label>
-        <input matInput [(ngModel)]="student.lastname" #Lastname="ngModel" name="lastname" required />
-        <mat-error *ngIf="Lastname.errors?.['required'] || Lastname.errors?.['pristine']"> Campo requerido </mat-error>
-    </mat-form-field>
+        <mat-form-field class="dialog-input" appearance="fill">
+            <mat-label>Apellido</mat-label>
+            <input 
+                matInput 
+                [(ngModel)]="student.lastname" 
+                #Lastname="ngModel" 
+                (keydown)="utils.preventNumbers($event)" 
+                (paste)="utils.preventPasteNumbers($event)"
+                maxlength="50"
+                name="lastname" 
+                required />
+            <mat-error *ngIf="Lastname.errors?.['required'] || Lastname.errors?.['pristine']"> Campo requerido </mat-error>
+        </mat-form-field>
 
-    <mat-form-field class="dialog-input" appearance="fill">
-    <mat-label>Bono</mat-label>
-    <mat-select [(ngModel)]="student.bonus.id" #bonus="ngModel" name="bonuse" required>
-        <mat-option *ngFor="let bonus of bonuses" [value]="bonus.id">{{bonus.bondType}}</mat-option>
-        <mat-error *ngIf="bonus.errors?.['required'] || bonus.errors?.['pristine']"> Campo requerido </mat-error>
-    </mat-select>
-    </mat-form-field>
-    <p class="error-message" *ngIf="errorMessage !== ''"> {{errorMessage}} </p>
-</mat-dialog-content>
+        <mat-form-field class="dialog-input" appearance="fill">
+        <mat-label>Bono</mat-label>
+        <mat-select [(ngModel)]="student.bonus.id" #bonus="ngModel" name="bonuse" required>
+            <mat-option *ngFor="let bonus of bonuses" [value]="bonus.id">{{bonus.bondType}}</mat-option>
+            <mat-error *ngIf="bonus.errors?.['required'] || bonus.errors?.['pristine']"> Campo requerido </mat-error>
+        </mat-select>
+        </mat-form-field>
+        <p class="error-message" *ngIf="errorMessage !== ''"> {{errorMessage}} </p>
+    </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-    <button mat-button type="button" (click)="onNoClick()">Cancelar</button>
-    <button mat-button type="submit" (click)="updateStudent()" [disabled]="editForm.invalid" cdkFocusInitial>Actualizar</button>
-</mat-dialog-actions>
+    <mat-dialog-actions align="end">
+        <button mat-button type="button" (click)="onNoClick()">Cancelar</button>
+        <button mat-button type="submit" (click)="updateStudent()" [disabled]="editForm.invalid" cdkFocusInitial>Actualizar</button>
+    </mat-dialog-actions>
 </form>  
