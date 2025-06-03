@@ -3,6 +3,7 @@ import { bonuses, Student } from 'src/app/data/data';
 import { StudentService } from '../services/student.service';
 import { Router } from '@angular/router';
 import { Utils } from 'src/app/utils/utils';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-student-form',
@@ -17,6 +18,9 @@ export class StudentFormComponent {
     name: '',
     lastname: '',
     nif: '',
+    phoneNumber: '',
+    address: '',
+    dayOfBirth: '',
     bonus: {
       id: undefined,
       bondType: '',
@@ -31,6 +35,9 @@ export class StudentFormComponent {
     const selectedBonus = this.bonuses.find(r => r.id === this.studentForm.bonus.id);
     if (selectedBonus) {
       this.studentForm.bonus = { ...selectedBonus };
+    }
+    if (this.studentForm.dayOfBirth instanceof Date) {
+      this.studentForm.dayOfBirth = formatDate(this.studentForm.dayOfBirth, 'yyyy-MM-dd', 'es');
     }
     this.studentService.saveStudent(this.studentForm).subscribe({
       next: res => 

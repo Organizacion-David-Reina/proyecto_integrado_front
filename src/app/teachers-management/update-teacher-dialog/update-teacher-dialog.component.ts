@@ -18,7 +18,10 @@ export class UpdateTeacherDialogComponent {
     name: '',
     lastname: '',
     mail: '',
-    nif: ''
+    nif: '',
+    phoneNumber: '',
+    address: '',
+    dayOfBirth: new Date()
   };
   errorMessage: string = '';
 
@@ -27,7 +30,6 @@ export class UpdateTeacherDialogComponent {
   }
 
   updateTeacher(): void {
-    console.log(this.teacher);
     this._teacherService.updateTeacher(this.teacher).subscribe({
       next: () => this.dialogRef.close(true),
       error: err => this.errorMessage = err.error.message

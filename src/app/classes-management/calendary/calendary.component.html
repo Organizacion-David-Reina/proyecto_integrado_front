@@ -21,9 +21,16 @@
     <div class="calendary-days"> 
        <div class="calendary-day" *ngFor="let day of weekdaysOnly">
             <div class="day-header"> 
-                <p class="day">{{ day | date: 'EEE d/MM' }}</p> 
+                <p class="day">{{ day | date: 'EEE d/MM' }}</p>
+                <button
+                    class="button-scroll"
+                    mat-icon-button
+                    aria-label="Bajar al final"
+                    (click)="scrollToBottom(containerRef)">
+                    <mat-icon>arrow_downward</mat-icon>
+                </button>
             </div>
-            <div class="dance-classes-container">
+            <div class="dance-classes-container" #containerRef>
                 <div class="dance-class" *ngFor="let class of getClassesForDay(day)" (click)="openDialog(class)">
                     <div class="first-row">
                         <img class="small-icon" src="assets/time-icon.png" alt="icon" />

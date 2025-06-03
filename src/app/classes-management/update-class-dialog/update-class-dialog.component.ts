@@ -29,7 +29,10 @@ export class UpdateClassDialogComponent implements AfterViewInit {
       name: '',
       lastname: '',
       mail: '',
-      nif: ''
+      nif: '',
+      phoneNumber: '',
+      address: '',
+      dayOfBirth: ''
     },
     room: {
       id: -1,

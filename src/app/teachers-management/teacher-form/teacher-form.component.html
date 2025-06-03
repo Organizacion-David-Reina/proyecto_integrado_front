@@ -65,7 +65,53 @@
                         <mat-error *ngIf="Mail.errors?.['pattern']"> Formato incorrecto </mat-error>
                         <mat-error *ngIf="Mail.errors?.['required'] || Mail.errors?.['pristine']"> Campo requerido </mat-error>
                     </mat-form-field>
+                </div>
 
+                <div class="third-row">
+                    <mat-form-field class="teacher-input">
+                        <mat-label>Teléfono</mat-label>
+                        <input type="tel" 
+                            matInput 
+                            placeholder="600-55-12-34"
+                            #PhoneNumber = "ngModel"
+                            name = "phoneNumber"
+                            [(ngModel)]="teacherForm.phoneNumber"
+                            (keydown)="utils.preventLetters($event)"
+                            (paste)="utils.preventPasteLetters($event)"
+                            required>
+                        <mat-icon matSuffix>mode_edit</mat-icon>
+                        <mat-error *ngIf="PhoneNumber.errors?.['required'] || PhoneNumber.errors?.['pristine']">Campo requerido</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="teacher-input">
+                        <mat-label>Fecha de nacimiento</mat-label>
+                        <input
+                            [(ngModel)]="teacherForm.dayOfBirth"
+                            name="dayOfBirth"
+                            #DayOfBirth = "ngModel"
+                            required
+                            readonly
+                            matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="DayOfBirth.errors?.['required']"> Campo requerido </mat-error>
+                        <mat-error *ngIf="DayOfBirth.errors?.['matDatepickerParse']"> Formato de fecha inválido </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="fourth-row>">
+                    <mat-form-field class="teacher-input-textarea">
+                        <mat-label>Dirección</mat-label>
+                        <textarea
+                            matInput
+                            #Address="ngModel"
+                            [(ngModel)]="teacherForm.address"
+                            name="address"
+                            required
+                            maxlength="150">
+                        </textarea>
+                        <mat-error *ngIf="Address.errors?.['required'] || Address.errors?.['pristine']">Campo requerido</mat-error>
+                    </mat-form-field>
                 </div>
                 
                 <button mat-flat-button [disabled]="registerTeacherForm.invalid">Acceder</button>

@@ -68,6 +68,9 @@ export interface Student {
     name: string,
     lastname: string,
     nif: string,
+    phoneNumber: string,
+    address: string,
+    dayOfBirth: string | Date,
     bonus: Bonus
 }
 
@@ -76,7 +79,10 @@ export interface Teacher {
     name: string,
     lastname: string,    
     mail: string,
-    nif: string
+    nif: string,
+    phoneNumber: string,
+    address: string,
+    dayOfBirth: string | Date,
 }
 
 

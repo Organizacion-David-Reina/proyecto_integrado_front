@@ -16,13 +16,16 @@ import { DeleteStudentDialogComponent } from '../delete-student-dialog/delete-st
   styleUrls: ['./students-list.component.scss'],
 })
 export class StudentsListComponent {
-  displayedColumns: string[] = ['Nif', 'Nombre completo', 'Tipo de bono', 'Mensualidad', 'Acciones'];
+  displayedColumns: string[] = ['Nif', 'Nombre completo', 'Teléfono', 'Dirección', 'Fecha de nacimiento', 'Tipo de bono', 'Mensualidad', 'Acciones'];
   studentList : Student[] = [];
   student: Student = {
     id: -1,
     name: '',
     lastname: '',
     nif: '',
+    phoneNumber: '',
+    address: '',
+    dayOfBirth: '',
     bonus: {
       id: -1,
       bondType: '',
@@ -31,6 +34,7 @@ export class StudentsListComponent {
   dataSource = new MatTableDataSource<Student>(this.studentList);
   bonuses = bonuses;
   selectedBonusId: number | null = null;
+  searchName: string = '';
   private _snackBar = inject(MatSnackBar);
 
   constructor(private _studentService: StudentService, private _route: ActivatedRoute, private _router: Router,
@@ -41,62 +45,71 @@ export class StudentsListComponent {
     });
   }
 
-    @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
-    ngAfterViewInit() {
-      this.dataSource.paginator = this.paginator;
-    }
-  
-    applyFilters() {
-      this.dataSource.data = this.studentList.filter(student =>
-        (this.selectedBonusId === null || student.bonus.id === this.selectedBonusId)
-      );
-    }
-    
-    
-    openUpdateDialog(student: Student): void {
-      const dialogRef = this.dialog.open(UpdateStudentDialogComponent, {
-        width: '400px',
-        data: student
-      });
-    
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this._studentService.getAllStudents().subscribe((response) => {
-            this.studentList = response;
-            this.dataSource.data = [...this.studentList];
-          });
-      
-          this._snackBar.openFromComponent(SnackBarComponent, {
-            data: 'Estudiante actualizado correctamente',
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          });
-        }
-      });
-    }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-    openDeleteDialog(studentId: number) {
-      const dialogRef = this.dialog.open(DeleteStudentDialogComponent, {
-        width: '400px',
-        data: studentId
-      });
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilters() {
+    const searchName = this.searchName.toLowerCase().trim();
+
+    this.dataSource.data = this.studentList.filter(student => {
+      const fullName = (student.name + ' ' + student.lastname).toLowerCase();
+      return (
+        (this.selectedBonusId === null || student.bonus.id === this.selectedBonusId) &&
+        fullName.includes(searchName)
+      );
+    });
+  }
+
+  openUpdateDialog(student: Student): void {
+    const dialogRef = this.dialog.open(UpdateStudentDialogComponent, {
+      width: '400px',
+      data: student
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this._studentService.getAllStudents().subscribe((response) => {
+          this.studentList = response;
+          this.dataSource.data = [...this.studentList];
+        });
     
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this._studentService.getAllStudents().subscribe((response) => {
-            this.studentList = response;
-            this.dataSource.data = [...this.studentList];
-          });
-      
-          this._snackBar.openFromComponent(SnackBarComponent, {
-            data: 'Estudiante eliminado correctamente',
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          });
-        }
-      });
-    }
+        this._snackBar.openFromComponent(SnackBarComponent, {
+          data: 'Estudiante actualizado correctamente',
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      }
+    });
+  }
+
+  openDeleteDialog(studentId: number) {
+    const dialogRef = this.dialog.open(DeleteStudentDialogComponent, {
+      width: '400px',
+      data: studentId
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this._studentService.getAllStudents().subscribe((response) => {
+          this.studentList = response;
+          this.dataSource.data = [...this.studentList];
+        });
+    
+        this._snackBar.openFromComponent(SnackBarComponent, {
+          data: 'Estudiante eliminado correctamente',
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      }
+    });
+  }
+
+  goToCreateElement(): void {
+    this._router.navigate(['/students/student-form'], { relativeTo: this._route });
+  }
 }

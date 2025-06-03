@@ -125,5 +125,9 @@ export class UsersListComponent implements AfterViewInit {
       }
     });
   }
+
+  goToCreateElement(): void {
+    this._router.navigate(['/users/user-form'], { relativeTo: this._route });
+  }
   
 }

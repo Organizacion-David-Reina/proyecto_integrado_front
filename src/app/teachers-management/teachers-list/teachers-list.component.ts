@@ -16,17 +16,21 @@ import { DeleteTeacherDialogComponent } from '../delete-teacher-dialog/delete-te
   styleUrls: ['./teachers-list.component.scss']
 })
 export class TeachersListComponent {
-  displayedColumns: string[] = ['Mail', 'Nombre completo', 'Nif', 'Acciones'];
+  displayedColumns: string[] = ['Mail', 'Nombre completo', 'Teléfono', 'Dirección', 'Fecha de nacimiento', 'Nif', 'Acciones'];
   teacherList : Teacher[] = [];
   teacher: Teacher = {
     id: -1,
     name: '',
     lastname: '',
     mail: '',
-    nif: ''
+    nif: '',
+    phoneNumber: '',
+    address: '',
+    dayOfBirth: new Date()
   };
   dataSource = new MatTableDataSource<Teacher>(this.teacherList);
   selectedBonusId: number | null = null;
+  searchName: string = '';
   private _snackBar = inject(MatSnackBar);
 
   constructor(private _teacherService: TeacherService, private _route: ActivatedRoute, private _router: Router,
@@ -37,64 +41,73 @@ export class TeachersListComponent {
     });
   }
 
-    @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
-    ngAfterViewInit() {
-      this.dataSource.paginator = this.paginator;
-    }
-  
-    applyFilters() {
-      const emailFilter = this.teacher.mail?.toLowerCase() || '';
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-      this.dataSource.data = this.teacherList.filter(teacher =>
-        teacher.mail.toLowerCase().includes(emailFilter)
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilters() {
+    const searchName = this.searchName.toLowerCase().trim();
+    const emailFilter = this.teacher.mail?.toLowerCase() || '';
+
+    this.dataSource.data = this.teacherList.filter(teacher => {
+      const fullName = (teacher.name + ' ' + teacher.lastname).toLowerCase();
+      return (
+        teacher.mail.toLowerCase().includes(emailFilter) &&
+        fullName.includes(searchName)
       );
-    }
+    });
+  }
+  
+  
+  openUpdateDialog(teacher: Teacher): void {
+    const dialogRef = this.dialog.open(UpdateTeacherDialogComponent, {
+      width: '400px',
+      data: teacher
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this._teacherService.getAllTeachers().subscribe((response) => {
+          this.teacherList = response;
+          this.dataSource.data = [...this.teacherList];
+        });
     
-    
-    openUpdateDialog(teacher: Teacher): void {
-      const dialogRef = this.dialog.open(UpdateTeacherDialogComponent, {
-        width: '400px',
-        data: teacher
-      });
-    
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this._teacherService.getAllTeachers().subscribe((response) => {
-            this.teacherList = response;
-            this.dataSource.data = [...this.teacherList];
-          });
-      
-          this._snackBar.openFromComponent(SnackBarComponent, {
-            data: 'Profesor actualizado correctamente',
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          });
-        }
-      });
-    }
+        this._snackBar.openFromComponent(SnackBarComponent, {
+          data: 'Profesor actualizado correctamente',
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      }
+    });
+  }
 
-    openDeleteDialog(teacherId: number) {
-      const dialogRef = this.dialog.open(DeleteTeacherDialogComponent, {
-        width: '400px',
-        data: teacherId
-      });
+  openDeleteDialog(teacherId: number) {
+    const dialogRef = this.dialog.open(DeleteTeacherDialogComponent, {
+      width: '400px',
+      data: teacherId
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this._teacherService.getAllTeachers().subscribe((response) => {
+          this.teacherList = response;
+          this.dataSource.data = [...this.teacherList];
+        });
     
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this._teacherService.getAllTeachers().subscribe((response) => {
-            this.teacherList = response;
-            this.dataSource.data = [...this.teacherList];
-          });
-      
-          this._snackBar.openFromComponent(SnackBarComponent, {
-            data: 'Profesor eliminado correctamente',
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          });
-        }
-      });
-    }
+        this._snackBar.openFromComponent(SnackBarComponent, {
+          data: 'Profesor eliminado correctamente',
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      }
+    });
+  }
+
+  goToCreateElement(): void {
+    this._router.navigate(['/teachers/teacher-form'], { relativeTo: this._route });
+  }
 }

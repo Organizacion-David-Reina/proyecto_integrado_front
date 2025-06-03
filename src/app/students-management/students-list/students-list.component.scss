@@ -17,6 +17,22 @@
     margin-right: auto;
 }
 
+.header-action-btn {
+    width: 180px !important;
+    height: 53px !important;
+    background-color: #1c3c45 !important;
+    color: #ffffff !important;
+    margin-left: auto;
+    margin-bottom: auto;
+}
+
+.filter-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
 .students-header h2 {
     color: white;
     font-style: bold;

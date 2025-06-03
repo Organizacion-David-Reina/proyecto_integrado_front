@@ -88,6 +88,14 @@ export class CalendaryComponent {
     });
   }
 
+  scrollToBottom(container: HTMLElement) {
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: 'smooth'
+      });
+  }
+
+
   addClass(day: Date): void {
     const formattedDate = day.toISOString();
     this.router.navigate(['/classes/class-form'], {

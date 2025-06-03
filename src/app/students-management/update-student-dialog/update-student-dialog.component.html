@@ -31,6 +31,34 @@
         </mat-form-field>
 
         <mat-form-field class="dialog-input" appearance="fill">
+            <mat-label>Teléfono</mat-label>
+            <input type="tel" 
+                matInput 
+                placeholder="600-55-12-34"
+                #PhoneNumber = "ngModel"
+                name = "phoneNumber"
+                [(ngModel)]="student.phoneNumber"
+                (keydown)="utils.preventLetters($event)"
+                (paste)="utils.preventPasteLetters($event)"
+                required>
+            <mat-icon matSuffix>mode_edit</mat-icon>
+            <mat-error *ngIf="PhoneNumber.errors?.['required'] || PhoneNumber.errors?.['pristine']">Campo requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="dialog-input">
+            <mat-label>Dirección</mat-label>
+            <textarea
+                matInput
+                #Address="ngModel"
+                [(ngModel)]="student.address"
+                name="address"
+                required
+                maxlength="150">
+            </textarea>
+            <mat-error *ngIf="Address.errors?.['required'] || Address.errors?.['pristine']">Campo requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="dialog-input" appearance="fill">
         <mat-label>Bono</mat-label>
         <mat-select [(ngModel)]="student.bonus.id" #bonus="ngModel" name="bonuse" required>
             <mat-option *ngFor="let bonus of bonuses" [value]="bonus.id">{{bonus.bondType}}</mat-option>

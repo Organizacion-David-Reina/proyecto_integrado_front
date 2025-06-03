@@ -18,6 +18,9 @@ export class UpdateStudentDialogComponent {
     name: '',
     lastname: '',
     nif: '',
+    phoneNumber: '',
+    address: '',
+    dayOfBirth: '',
     bonus: {
       id: 0,
       bondType: '',
