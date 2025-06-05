@@ -4,16 +4,15 @@
     <mat-dialog-content>
 
         <mat-form-field class="dialog-input" appearance="fill">
-            <mat-label>Ingresa Nif del Alumno</mat-label>
-            <input 
-                matInput 
-                [(ngModel)]="reservation.studentNif" 
-                #studentNif="ngModel" 
-                name="studentNif" 
-                pattern="^[0-9]{8}[A-Za-z]$"
-                required />
-            <mat-error *ngIf="studentNif.errors?.['pattern']"> Formato incorrecto </mat-error>
-            <mat-error *ngIf="studentNif.errors?.['required'] || studentNif.errors?.['pristine']"> Campo requerido </mat-error>
+            <mat-label>Seleccione un estudiante</mat-label>
+            <mat-select
+                [(ngModel)]="reservation.studentNif"
+                name="student"
+                #student = "ngModel"
+                required>
+                <mat-option [value]="student.nif" *ngFor="let student of students">{{student.name + " " + student.lastname + " | " + student.nif}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="student.errors?.['required'] || student.errors?.['pristine']"> Campo requerido </mat-error>
         </mat-form-field>
 
 
