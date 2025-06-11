@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CalendaryComponent } from './calendary/calendary.component';
 import { ClassFormComponent } from './class-form/class-form.component';
 import { classesResolver } from '../auth/classes.resolver';
+import { workerGuard } from '../auth/worker.guard';
+import { attendantGuard } from '../auth/attendant.guard';
 
 const routes: Routes = [
   {
@@ -14,6 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'class-form',
+    canActivate: [workerGuard, attendantGuard],
     component: ClassFormComponent,
     data: { showNavbar: false }
   }

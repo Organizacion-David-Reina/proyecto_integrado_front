@@ -71,7 +71,8 @@ export interface Student {
     phoneNumber: string,
     address: string,
     dayOfBirth: string | Date,
-    bonus: Bonus
+    bonus: Bonus,
+    mail: string
 }
 
 export interface Teacher {

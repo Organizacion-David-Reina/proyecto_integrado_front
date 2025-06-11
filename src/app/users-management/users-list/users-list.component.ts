@@ -49,17 +49,30 @@ export class UsersListComponent implements AfterViewInit {
   selectedRoleId: number | null = null;
   private _snackBar = inject(MatSnackBar);
 
-  constructor(private _userService: UserService, private _route: ActivatedRoute, private _router: Router,
-    private dialog: MatDialog) {
-    const storedUser = localStorage.getItem('user');
+constructor(
+  private _userService: UserService,
+  private _route: ActivatedRoute,
+  private _router: Router,
+  private dialog: MatDialog
+) {
+  const storedUser = localStorage.getItem('user');
 
-    if (storedUser) {
-      this.userLogged = JSON.parse(storedUser) as UserResponse;
-    }
-    this._userService.getAllUsers().subscribe((response) => {
-      this.userList = response.filter(
-        user => user.id !== this.userLogged.id
-      );
+  if (storedUser) {
+    this.userLogged = JSON.parse(storedUser) as UserResponse;
+  }
+
+  this._userService.getAllUsers().subscribe((response) => {
+    this.userList = response.filter((user) => {
+      // Siempre ocultar al usuario logueado
+        if (user.id === this.userLogged.id) {
+          return false;
+        }
+        // Si el usuario logueado es rol 2, filtra usuarios de rol 2
+        if (this.userLogged.role.id === 2 && user.role.id === 2) {
+          return false;
+        }
+        return true;
+      });
       this.dataSource.data = [...this.userList];
     });
   }

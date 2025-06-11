@@ -16,7 +16,7 @@ import { DeleteStudentDialogComponent } from '../delete-student-dialog/delete-st
   styleUrls: ['./students-list.component.scss'],
 })
 export class StudentsListComponent {
-  displayedColumns: string[] = ['Nif', 'Nombre completo', 'Teléfono', 'Dirección', 'Fecha de nacimiento', 'Tipo de bono', 'Mensualidad', 'Acciones'];
+  displayedColumns: string[] = ['Nif', 'Nombre completo', 'Teléfono', 'Mail', 'Dirección', 'Fecha de nacimiento', 'Tipo de bono', 'Mensualidad', 'Acciones'];
   studentList : Student[] = [];
   student: Student = {
     id: -1,
@@ -29,7 +29,8 @@ export class StudentsListComponent {
     bonus: {
       id: -1,
       bondType: '',
-      price: 0}
+      price: 0},
+    mail: ''
   };
   dataSource = new MatTableDataSource<Student>(this.studentList);
   bonuses = bonuses;

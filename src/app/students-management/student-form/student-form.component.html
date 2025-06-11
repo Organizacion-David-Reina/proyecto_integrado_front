@@ -82,19 +82,19 @@
                     </mat-form-field>
 
                     <mat-form-field class="student-input">
-                        <mat-label>Fecha de nacimiento</mat-label>
-                        <input
-                            [(ngModel)]="studentForm.dayOfBirth"
-                            name="dayOfBirth"
-                            #DayOfBirth = "ngModel"
-                            required
-                            readonly
-                            matInput [matDatepicker]="picker">
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                        <mat-error *ngIf="DayOfBirth.errors?.['required']"> Campo requerido </mat-error>
-                        <mat-error *ngIf="DayOfBirth.errors?.['matDatepickerParse']"> Formato de fecha inválido </mat-error>
+                        <mat-label> Mail </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="example@gmail.com"
+                            #Mail = "ngModel"
+                            [(ngModel)]="studentForm.mail"
+                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            name = "mail"
+                            required/>
+                        <mat-error *ngIf="Mail.errors?.['pattern']"> Formato incorrecto </mat-error>
+                        <mat-error *ngIf="Mail.errors?.['required'] || Mail.errors?.['pristine']"> Campo requerido </mat-error>
                     </mat-form-field>
+
                 </div>
 
                 <div class="fourth-row>">
@@ -111,8 +111,25 @@
                         <mat-error *ngIf="Address.errors?.['required'] || Address.errors?.['pristine']">Campo requerido</mat-error>
                     </mat-form-field>
                 </div>
+
+                <div class="fifth-row">
+                    <mat-form-field class="student-input">
+                        <mat-label>Fecha de nacimiento</mat-label>
+                        <input
+                            [(ngModel)]="studentForm.dayOfBirth"
+                            name="dayOfBirth"
+                            #DayOfBirth = "ngModel"
+                            required
+                            readonly
+                            matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="DayOfBirth.errors?.['required']"> Campo requerido </mat-error>
+                        <mat-error *ngIf="DayOfBirth.errors?.['matDatepickerParse']"> Formato de fecha inválido </mat-error>
+                    </mat-form-field>
+                </div>
                 
-                <button mat-flat-button [disabled]="registerStudentForm.invalid">Acceder</button>
+                <button mat-flat-button [disabled]="registerStudentForm.invalid">Registrar</button>
             </div>
             <p class="error-message" *ngIf="errorMessage !== ''"> {{errorMessage}} </p>
         </form>

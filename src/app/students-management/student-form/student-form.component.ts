@@ -25,7 +25,8 @@ export class StudentFormComponent {
       id: undefined,
       bondType: '',
       price: 0
-    }
+    },
+    mail: ''
   }
   errorMessage: string = '';
 

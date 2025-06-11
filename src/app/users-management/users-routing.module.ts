@@ -5,6 +5,8 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { loginGuard } from '../auth/login.guard';
 import { authGuard } from '../auth/auth.guard';
+import { workerGuard } from '../auth/worker.guard';
+import { attendantGuard } from '../auth/attendant.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'users-list', pathMatch: 'full' },
@@ -18,13 +20,13 @@ const routes: Routes = [
   {
     path: 'user-form',
     component: UserFormComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, workerGuard, attendantGuard],
     data: { showNavbar: false }
   },
   {
     path: 'users-list',
     component: UsersListComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard, workerGuard]
   }
 ];
 

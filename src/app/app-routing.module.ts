@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from './auth/auth.guard';
+import { workerGuard } from './auth/worker.guard';
+import { attendantGuard } from './auth/attendant.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/classes/classes-calendar', pathMatch: 'full' },
   {
+
     path: 'users',
     loadChildren: () => import('./users-management/users.module').then(m => m.UsersModule),
   },
@@ -15,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'teachers',
-    canActivate: [authGuard],
+    canActivate: [authGuard, workerGuard, attendantGuard],
     loadChildren: () => import('./teachers-management/teachers.module').then(m => m.TeachersModule)
   },
   {

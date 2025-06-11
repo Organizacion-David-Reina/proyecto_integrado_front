@@ -21,7 +21,7 @@
         </mat-select>
       </mat-form-field>  
 
-      <button mat-flat-button class="header-action-btn" (click)="goToCreateElement()"> Insertar </button>
+      <button mat-flat-button class="header-action-btn" (click)="goToCreateElement()" *ngIf="userLogged.role.id === 1"> Insertar </button>
     </div>
   </div>
   
@@ -59,11 +59,17 @@
       </ng-container>
 
       <ng-container matColumnDef="Acciones">
-        <th mat-header-cell *matHeaderCellDef> Acciones </th>
-        <td mat-cell *matCellDef="let user"> 
-          <img class="small-icon" 
-          (click)="openDeleteDialog(user.id); $event.stopPropagation()"   
-          src="assets/delete_icon.png" alt="icon" /> 
+        <th mat-header-cell *matHeaderCellDef>
+          <ng-container *ngIf="userLogged.role.id === 1">
+            Acciones
+          </ng-container>
+        </th>
+        <td mat-cell *matCellDef="let user">
+          <ng-container *ngIf="userLogged.role.id === 1">
+            <img class="small-icon" 
+                (click)="openDeleteDialog(user.id); $event.stopPropagation()"   
+                src="assets/delete_icon.png" alt="icon" /> 
+          </ng-container>
         </td>
       </ng-container>
   

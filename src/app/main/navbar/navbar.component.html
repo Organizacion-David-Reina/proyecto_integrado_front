@@ -9,11 +9,11 @@
     </a>
     <div class="submenu" *ngIf="openedMenu === 'clases'">
       <a routerLink="classes/classes-calendar"> Calendario </a>
-      <a routerLink="classes/class-form">Agregar Clase</a>
+      <a routerLink="classes/class-form" *ngIf="user.role.id !== 3"> Agregar Clase </a>
     </div>
   </div>
 
-  <div class="menu-item" *ngIf="user.role.id !== 3">
+  <div class="menu-item" *ngIf="user.role.id === 1">
     <a routerLink="#" (click)="toggleMenu('profesores'); $event.preventDefault()">Profesores
         <span class="arrow">{{ openedMenu === 'profesores' ? '▲' : '▼' }}</span>
     </a>
@@ -39,7 +39,7 @@
     </a>
     <div class="submenu" *ngIf="openedMenu === 'usuarios'">
       <a routerLink="users/users-list">Lista de usuarios</a>
-      <a routerLink="users/user-form">Agregar usuario</a>
+      <a routerLink="users/user-form" *ngIf="user.role.id === 1">Agregar usuario</a>
     </div>
   </div>
 

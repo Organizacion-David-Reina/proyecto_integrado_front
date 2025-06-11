@@ -25,7 +25,8 @@ export class UpdateStudentDialogComponent {
       id: 0,
       bondType: '',
       price: 0
-    }
+    },
+    mail: ''
   };
   errorMessage: string = '';
   bonuses = bonuses;

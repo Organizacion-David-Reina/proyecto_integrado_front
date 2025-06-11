@@ -31,6 +31,13 @@
         </mat-form-field>
 
         <mat-form-field class="dialog-input" appearance="fill">
+            <mat-label>Mail</mat-label>
+            <input matInput [(ngModel)]="student.mail" #Mail="ngModel" name="mail" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required />
+            <mat-error *ngIf="Mail.errors?.['required'] || Mail.errors?.['pristine']"> Campo requerido </mat-error>
+            <mat-error *ngIf="Mail.errors?.['pattern']"> Formato incorrecto </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="dialog-input" appearance="fill">
             <mat-label>Teléfono</mat-label>
             <input type="tel" 
                 matInput 
