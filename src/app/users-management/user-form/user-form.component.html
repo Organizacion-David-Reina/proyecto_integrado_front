@@ -70,11 +70,11 @@
                         <mat-label>Email corporativo</mat-label>
                         <input
                             matInput
-                            placeholder="example@example.com"
+                            placeholder="example@stepflow.com"
                             #Mail = "ngModel"
                             name = "corporateMail"
                             [(ngModel)]="userForm.credentials.corporateMail"
-                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            pattern="^[a-zA-Z0-9._%+-]+@stepflow\.com$"
                             required/>
                         <mat-error *ngIf="Mail.errors?.['pattern']"> Formato incorrecto </mat-error>
                         <mat-error *ngIf="Mail.errors?.['required'] || Mail.errors?.['pristine']">Campo requerido</mat-error>

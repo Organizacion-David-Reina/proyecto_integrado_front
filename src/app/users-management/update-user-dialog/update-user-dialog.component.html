@@ -32,7 +32,8 @@
 
     <mat-form-field class="dialog-input" appearance="fill">
         <mat-label>Correo corporativo</mat-label>
-        <input matInput [(ngModel)]="user.corporateMail" #Mail = "ngModel" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" name="corporateMail" required email />
+        <input matInput placeholder="example@stepflow.com" [(ngModel)]="user.corporateMail" #Mail = "ngModel" 
+            pattern="^[a-zA-Z0-9._%+-]+@stepflow\.com$" name="corporateMail" required email />
         <mat-error *ngIf="Mail.errors?.['pattern']"> Formato incorrecto </mat-error>
         <mat-error *ngIf="Mail.errors?.['required'] || Mail.errors?.['pristine']">Campo requerido</mat-error>
     </mat-form-field>
