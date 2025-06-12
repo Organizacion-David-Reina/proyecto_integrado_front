@@ -1,0 +1,182 @@
+.teacher-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #299ebb;
+    border-radius: 20px;
+    width: 40%;
+    height: 100vh;
+}
+
+.form-container form {
+    align-self: center;
+}
+  
+.form-container h2 {
+    align-self: flex-start;
+    color: #ffffff;
+    font-style: bold;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 25px !important;
+    padding: 0 0 20px 10px;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+}
+
+.logo {
+    width: 350px;
+    height: 350px;
+}
+
+.inputs-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.teacher-input {
+    width: 280px !important;
+    height: 75px;
+    padding: 0 0 20px 10px;
+}
+
+.teacher-input-textarea {
+    width: 570px !important;
+    padding: 0 0 20px 10px;
+    resize: vertical;
+}
+
+button {
+    width: 280px !important;
+    height: 40px !important;
+    background-color: #0c1b3a !important;
+    color: #ffffff !important;
+    margin-left: 10px;
+}
+
+button[disabled] {
+    background-color: #4d525f !important;
+    color: #ffffff;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.error-message {
+    text-align: center;
+    margin-top: 20px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    color: red !important;
+    font-weight: bold !important;
+    font-size: 15px !important;
+    margin-left: 10px !important;
+}
+
+/* ------------------- RESPONSIVE ------------------- */
+@media (max-width: 1100px) {
+    .form-container {
+        width: 60%;
+        min-width: 320px;
+        height: auto;
+        padding: 20px 0;
+    }
+    .icon-container {
+        width: 40%;
+    }
+    .logo {
+        width: 220px;
+        height: 220px;
+    }
+    .teacher-input,
+    button {
+        width: 220px !important;
+        min-width: 0;
+    }
+    .teacher-input-textarea {
+        width: 350px !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .teacher-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        padding: 30px 0;
+    }
+    .form-container {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        border-radius: 16px;
+        padding: 20px 0;
+    }
+    .icon-container {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    .logo {
+        width: 120px;
+        height: 120px;
+    }
+    .teacher-input,
+    button {
+        width: 90vw !important;
+        max-width: 320px;
+    }
+    .teacher-input-textarea {
+        width: 90vw !important;
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 500px) {
+    .form-container {
+        width: 100%;
+        border-radius: 0;
+        padding: 10px 0;
+    }
+    .logo {
+        width: 80px;
+        height: 80px;
+    }
+    .form-container h2 {
+        font-size: 18px !important;
+        padding-left: 5px;
+    }
+    .teacher-input,
+    button {
+        width: 98vw !important;
+        max-width: 99vw;
+        min-width: 0;
+        font-size: 14px;
+        margin-left: 0;
+        padding-left: 0;
+    }
+    .teacher-input-textarea {
+        width: 98vw !important;
+        max-width: 99vw;
+        min-width: 0;
+        font-size: 14px;
+        padding-left: 0;
+    }
+    .error-message {
+        font-size: 13px !important;
+        margin-left: 0 !important;
+    }
+}

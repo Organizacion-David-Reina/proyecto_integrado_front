@@ -1,0 +1,50 @@
+<div class="sidebar">
+  <img class="app_icon" src="assets/app_icon.png" alt="Logo">
+
+  <a routerLink="classes/classes-calendar">Inicio</a>
+
+  <div class="menu-item">
+    <a routerLink="#" (click)="toggleMenu('clases'); $event.preventDefault()">Clases
+        <span class="arrow">{{ openedMenu === 'clases' ? '▲' : '▼' }}</span>
+    </a>
+    <div class="submenu" *ngIf="openedMenu === 'clases'">
+      <a routerLink="classes/classes-calendar"> Calendario </a>
+      <a routerLink="classes/class-form" *ngIf="user.role.id !== 3"> Agregar Clase </a>
+    </div>
+  </div>
+
+  <div class="menu-item" *ngIf="user.role.id === 1">
+    <a routerLink="#" (click)="toggleMenu('profesores'); $event.preventDefault()">Profesores
+        <span class="arrow">{{ openedMenu === 'profesores' ? '▲' : '▼' }}</span>
+    </a>
+    <div class="submenu" *ngIf="openedMenu === 'profesores'">
+      <a routerLink="teachers/teachers-list">Lista de Profesores</a>
+      <a routerLink="teachers/teacher-form">Agregar Profesor</a>
+    </div>
+  </div>
+
+    <div class="menu-item">
+    <a routerLink="#" (click)="toggleMenu('alumnos'); $event.preventDefault()">Alumnos
+        <span class="arrow">{{ openedMenu === 'alumnos' ? '▲' : '▼' }}</span>
+    </a>
+    <div class="submenu" *ngIf="openedMenu === 'alumnos'">
+      <a routerLink="students/students-list">Lista de alumnos</a>
+      <a routerLink="students/student-form">Agregar alumno</a>
+    </div>
+  </div>
+
+  <div class="menu-item" *ngIf="user.role.id !== 3">
+    <a routerLink="#" (click)="toggleMenu('usuarios'); $event.preventDefault()">Usuarios
+        <span class="arrow">{{ openedMenu === 'usuarios' ? '▲' : '▼' }}</span>
+    </a>
+    <div class="submenu" *ngIf="openedMenu === 'usuarios'">
+      <a routerLink="users/users-list">Lista de usuarios</a>
+      <a routerLink="users/user-form" *ngIf="user.role.id === 1">Agregar usuario</a>
+    </div>
+  </div>
+
+  <div class="menu-item user-profile" (click)="openUserDataDialog()">
+    <img class="user-img" src="assets/user_icon.png" alt="Logo">
+    <p>{{user.name + " " + user.lastname}}</p>
+  </div>
+</div>

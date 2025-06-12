@@ -1,0 +1,142 @@
+<div class="student-container">
+    <div class="form-container">
+        <form #registerStudentForm="ngForm" [(ngModel)]="studentForm" (ngSubmit)="saveStudent()">
+            <div class="inputs-container">
+                    
+                <h2 class="main-form-titles">Registro de estudiante</h2>
+                
+                <div class="first-row">  
+                    <mat-form-field class="student-input">
+                        <mat-label>Nombre </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="Luis"
+                            #Name = "ngModel"
+                            [(ngModel)]="studentForm.name"
+                            (keydown)="utils.preventNumbers($event)" 
+                            (paste)="utils.preventPasteNumbers($event)"
+                            maxlength="30"
+                            name = "name"
+                            required/>
+                        <mat-error *ngIf="Name.errors?.['required'] || Name.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="student-input">
+                        <mat-label> Apellidos </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="Perez"
+                            #Lastname = "ngModel"
+                            [(ngModel)]="studentForm.lastname"
+                            (keydown)="utils.preventNumbers($event)" 
+                            (paste)="utils.preventPasteNumbers($event)"
+                            maxlength="50"
+                            name = "lastname"
+                            required/>
+                        <mat-error *ngIf="Lastname.errors?.['required'] || Lastname.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="second-row">
+                    <mat-form-field class="student-input">
+                        <mat-label> Nif </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="123456789A"
+                            #Nif = "ngModel"
+                            [(ngModel)]="studentForm.nif"
+                            pattern="^[0-9]{8}[A-Za-z]$"
+                            name = "nif"
+                            required/>
+                        <mat-error *ngIf="Nif.errors?.['pattern']"> Formato incorrecto </mat-error>
+                        <mat-error *ngIf="Nif.errors?.['required'] || Nif.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="student-input">
+                        <mat-label>Tipo de bono</mat-label>
+                        <mat-select
+                            [(ngModel)]="studentForm.bonus.id"
+                            name="bonus"
+                            #Bonus = "ngModel"
+                            required>
+                            <mat-option [value]="bonus.id" *ngFor="let bonus of bonuses">{{bonus.bondType}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="Bonus.errors?.['required'] || Bonus.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="third-row">
+                    <mat-form-field class="student-input">
+                        <mat-label>Teléfono</mat-label>
+                        <input type="tel" 
+                            matInput 
+                            placeholder="600-55-12-34"
+                            #PhoneNumber = "ngModel"
+                            name = "phoneNumber"
+                            [(ngModel)]="studentForm.phoneNumber"
+                            (keydown)="utils.preventLetters($event)"
+                            (paste)="utils.preventPasteLetters($event)"
+                            required>
+                        <mat-icon matSuffix>mode_edit</mat-icon>
+                        <mat-error *ngIf="PhoneNumber.errors?.['required'] || PhoneNumber.errors?.['pristine']">Campo requerido</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="student-input">
+                        <mat-label> Mail </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="example@gmail.com"
+                            #Mail = "ngModel"
+                            [(ngModel)]="studentForm.mail"
+                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            name = "mail"
+                            required/>
+                        <mat-error *ngIf="Mail.errors?.['pattern']"> Formato incorrecto </mat-error>
+                        <mat-error *ngIf="Mail.errors?.['required'] || Mail.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                <div class="fourth-row>">
+                    <mat-form-field class="student-input-textarea">
+                        <mat-label>Dirección</mat-label>
+                        <textarea
+                            matInput
+                            #Address="ngModel"
+                            [(ngModel)]="studentForm.address"
+                            name="address"
+                            required
+                            maxlength="150">
+                        </textarea>
+                        <mat-error *ngIf="Address.errors?.['required'] || Address.errors?.['pristine']">Campo requerido</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="fifth-row">
+                    <mat-form-field class="student-input">
+                        <mat-label>Fecha de nacimiento</mat-label>
+                        <input
+                            [(ngModel)]="studentForm.dayOfBirth"
+                            name="dayOfBirth"
+                            #DayOfBirth = "ngModel"
+                            required
+                            readonly
+                            matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="DayOfBirth.errors?.['required']"> Campo requerido </mat-error>
+                        <mat-error *ngIf="DayOfBirth.errors?.['matDatepickerParse']"> Formato de fecha inválido </mat-error>
+                    </mat-form-field>
+                </div>
+                
+                <button mat-flat-button [disabled]="registerStudentForm.invalid">Registrar</button>
+            </div>
+            <p class="error-message" *ngIf="errorMessage !== ''"> {{errorMessage}} </p>
+        </form>
+    </div>
+
+    <div class="icon-container">
+        <img class="logo" src="assets/app_icon.png" alt="Logo">
+    </div>
+</div>
+

@@ -1,0 +1,27 @@
+.error-message {
+    text-align: center !important;
+    margin-top: 15px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    color: red !important;
+    font-weight: bold !important;
+    font-size: 15px !important;
+}
+
+h2 {
+    text-align: center !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: bold !important;
+    font-size: 20px !important;
+}
+
+mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.dialog-input {
+    width: 90%;
+}

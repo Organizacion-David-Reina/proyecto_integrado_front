@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>Actualizar profesor</h2>
+
+<form #editForm="ngForm">
+<mat-dialog-content>
+    <mat-form-field class="dialog-input" appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input 
+            matInput 
+            [(ngModel)]="teacher.name" 
+            #Name="ngModel" 
+            name="name"
+            (keydown)="utils.preventNumbers($event)" 
+            (paste)="utils.preventPasteNumbers($event)"
+            maxlength="30"
+            required />
+        <mat-error *ngIf="Name.errors?.['required'] || Name.errors?.['pristine']"> Campo requerido </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="dialog-input" appearance="fill">
+        <mat-label>Apellidos</mat-label>
+        <input 
+            matInput 
+            [(ngModel)]="teacher.lastname" 
+            #Lastname="ngModel" 
+            (keydown)="utils.preventNumbers($event)" 
+            (paste)="utils.preventPasteNumbers($event)"
+            maxlength="50"
+            name="lastname" 
+            required />
+        <mat-error *ngIf="Lastname.errors?.['required'] || Lastname.errors?.['pristine']"> Campo requerido </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="dialog-input" appearance="fill">
+        <mat-label>Mail</mat-label>
+        <input matInput [(ngModel)]="teacher.mail" #Mail="ngModel" name="mail" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required />
+        <mat-error *ngIf="Mail.errors?.['required'] || Mail.errors?.['pristine']"> Campo requerido </mat-error>
+        <mat-error *ngIf="Mail.errors?.['pattern']"> Formato incorrecto </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="dialog-input" appearance="fill">
+        <mat-label>Teléfono</mat-label>
+        <input type="tel" 
+            matInput 
+            placeholder="600-55-12-34"
+            #PhoneNumber = "ngModel"
+            name = "phoneNumber"
+            [(ngModel)]="teacher.phoneNumber"
+            (keydown)="utils.preventLetters($event)"
+            (paste)="utils.preventPasteLetters($event)"
+            required>
+        <mat-icon matSuffix>mode_edit</mat-icon>
+        <mat-error *ngIf="PhoneNumber.errors?.['required'] || PhoneNumber.errors?.['pristine']">Campo requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="dialog-input">
+        <mat-label>Dirección</mat-label>
+        <textarea
+            matInput
+            #Address="ngModel"
+            [(ngModel)]="teacher.address"
+            name="address"
+            required
+            maxlength="150">
+        </textarea>
+        <mat-error *ngIf="Address.errors?.['required'] || Address.errors?.['pristine']">Campo requerido</mat-error>
+    </mat-form-field>
+    <p class="error-message" *ngIf="errorMessage !== ''"> {{errorMessage}} </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onNoClick()">Cancelar</button>
+    <button mat-button type="submit" (click)="updateTeacher()" [disabled]="editForm.invalid" cdkFocusInitial>Actualizar</button>
+</mat-dialog-actions>
+</form>  

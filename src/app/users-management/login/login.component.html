@@ -1,0 +1,43 @@
+<div class="login-container">
+    <div class="icon-container">
+        <div class="icon-container">
+            <img class="logo" src="assets/app_icon.png" alt="Logo">
+        </div>
+    </div>
+    <div class="form-container">
+        <h1 class="login-title">Bienvenido</h1>
+        <h3 class="login-subtitle">Introduce tus datos para acceder a tu cuenta.</h3>
+        <form #loginForm="ngForm" (ngSubmit)="login(corporateMail, password)">
+            <div class="inputs-container">
+                <mat-form-field  class="login-input">
+                    <mat-label>Introduce tu email</mat-label>
+                    <input
+                        matInput
+                        placeholder="pat@example.com"
+                        #User = "ngModel"
+                        name = "corporateMail"
+                        [(ngModel)]="corporateMail"
+                        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                        required/>
+                    <mat-error *ngIf="User.errors?.['pattern']"> Formato incorrecto </mat-error>
+                    <mat-error *ngIf="User.errors?.['required'] || User.errors?.['pristine']">Campo requerido</mat-error>
+                </mat-form-field>
+
+                <mat-form-field  class="login-input">
+                    <mat-label>Introduce tu contraseña</mat-label>
+                    <input
+                        #Password = "ngModel"
+                        name="password"
+                        [(ngModel)]="password"
+                        matInput type="Password"
+                        required/>
+                        <mat-error *ngIf="Password.invalid || Password.pristine">Campo requerido</mat-error>
+                </mat-form-field>
+
+                <button mat-flat-button [disabled]="loginForm.invalid">Acceder</button>
+            </div>
+        </form>
+
+        <p class="error-message" *ngIf="errorMessage !== ''"> {{errorMessage}} </p>
+    </div>
+</div>

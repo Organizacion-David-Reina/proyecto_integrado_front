@@ -1,0 +1,120 @@
+<div class="class-container">
+    <div class="form-container">
+        <form #registerClassForm="ngForm" [(ngModel)]="classForm" (ngSubmit)="saveClass()">
+            <div class="inputs-container">
+                    
+                <h2 class="main-form-titles">Registro de nueva clase</h2>
+                
+                <div class="first-row">  
+                    <mat-form-field class="class-input">
+                        <mat-label>Esilo</mat-label>
+                        <mat-select
+                            [(ngModel)]="classForm.style"
+                            name="style"
+                            #style = "ngModel"
+                            required>
+                            <mat-option [value]="style" *ngFor="let style of styles">{{style.style}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="style.errors?.['required'] || style.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="class-input">
+                        <mat-label>Profesor</mat-label>
+                        <mat-select
+                            [(ngModel)]="classForm.teacher"
+                            name="teacher"
+                            #teacher = "ngModel"
+                            required>
+                            <mat-option [value]="teacher" *ngFor="let teacher of teachers">{{teacher.name + " " + teacher.lastname}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="teacher.errors?.['required'] || teacher.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="second-row">
+                    <mat-form-field class="class-input">
+                        <mat-label>Sala</mat-label>
+                        <mat-select
+                            [(ngModel)]="classForm.room"
+                            name="room"
+                            #room = "ngModel"
+                            required>
+                            <mat-option [value]="room" *ngFor="let room of rooms">{{room.roomName}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="room.errors?.['required'] || room.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="class-input">
+                        <mat-label>Seleccione una fecha</mat-label>
+                        <input
+                            [(ngModel)]="classForm.day"
+                            name="day"
+                            #day = "ngModel"
+                            required
+                            readonly
+                            matInput [matDatepicker]="picker"
+                            [matDatepickerFilter]="filterWeekdays">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="day.errors?.['required']"> Campo requerido </mat-error>
+                        <mat-error *ngIf="day.errors?.['matDatepickerParse']"> Formato de fecha inválido </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="third-row">
+                    <mat-form-field class="class-input" appearance="fill">
+                        <mat-label>Hora de inicio</mat-label>
+                        <input 
+                            matInput type="time" 
+                            [(ngModel)]="classForm.startTime"
+                            (ngModelChange)="validateEndTime()" 
+                            #startTime = "ngModel"
+                            name="startTime"
+                            required>
+                        <mat-error *ngIf="startTime.errors?.['required']"> Campo requerido </mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field class="class-input" appearance="fill">
+                        <mat-label>Hora de fin</mat-label>
+                        <input 
+                            matInput type="time" 
+                            [(ngModel)]="classForm.endTime"
+                            (ngModelChange)="validateEndTime()"  
+                            #endTime = "ngModel"
+                            name="endTime"
+                            required>
+                            <mat-error *ngIf="endTime.errors?.['endBeforeStart']">
+                                Hora no válida.
+                            </mat-error>
+                        <mat-error *ngIf="endTime.errors?.['required']"> Campo requerido </mat-error>
+                    </mat-form-field>
+                </div>
+
+                
+                <div class="forth-row">
+                    <mat-form-field class="class-input">
+                        <mat-label>Nivel</mat-label>
+                        <mat-select
+                            [(ngModel)]="classForm.level"
+                            name="level"
+                            #level = "ngModel"
+                            required>
+                            <mat-option [value]="level" *ngFor="let level of levels">{{level}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="level.errors?.['required'] || level.errors?.['pristine']"> Campo requerido </mat-error>
+                    </mat-form-field>
+                </div>
+                
+                <button mat-flat-button [disabled]="registerClassForm.invalid">Registrar</button>
+            </div>
+            <p class="error-message" *ngIf="errorMessage !== ''"> {{errorMessage}} </p>
+        </form>
+    </div>
+
+    <div class="icon-container">
+        <img class="logo" src="assets/app_icon.png" alt="Logo">
+    </div>
+</div>
+
+

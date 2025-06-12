@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Datos Usuario</h2>
+
+<mat-dialog-content>
+  <div>
+    <p><strong>Nombre:</strong> {{ user.name + " " + user.lastname }}</p>
+    <p><strong>Correo:</strong> {{ user.corporateMail }}</p>
+    <p><strong>Teléfono:</strong> {{ user.phoneNumber }}</p>
+    <p><strong>Rol:</strong> {{ user.role.rol }}</p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="onClose()">Cerrar</button>
+  <button mat-button type="button" (click)="logOut()">Cerrar sesión</button>
+</mat-dialog-actions>
